@@ -9,8 +9,8 @@ export default function Home() {
     headache: "",
     fatigue: "",
     nausea: "",
-    soreThroat: "",
-    runnyNose: "",
+    sore_throat: "",
+    runny_nose: "",
   });
 
   // State for backend response
@@ -30,7 +30,6 @@ export default function Home() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': "Bearer bacaa3381e4c453088449ccd04f270cf"
         },
         body: JSON.stringify(form),
       });
@@ -54,16 +53,16 @@ export default function Home() {
         <p>Please answer the questions below</p>
 
         <form className="symptom-form" onSubmit={handleSubmit}>
-          {Object.keys(form).map((key) => (
+          {Object.entries(form).map(([key, value]) => (
             <label key={key}>
-              {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, " $1")}:
+              {key.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}:
               <input
                 type="number"
                 name={key}
                 min="0"
                 max="9"
                 placeholder="0-9"
-                value={form[key]}
+                value={value}
                 onChange={handleChange}
                 required
               />
@@ -76,16 +75,17 @@ export default function Home() {
           <div className="result">
             {result.error ? (
               <p style={{ color: "red" }}>{result.error}</p>
-            ) : (
+            ) : result.matched_diseases ? (
               <>
-                <h3>Result:</h3>
-                <p>
-                  <strong>Score:</strong> {result.score}
-                </p>
-                <p>
-                  <strong>Status:</strong> {result.status}
-                </p>
+                <h3>Matched Diseases:</h3>
+                <ul>
+                  {result.matched_diseases.map((disease, index) => (
+                    <li key={index}>{disease}</li>
+                  ))}
+                </ul>
               </>
+            ) : (
+              <p>{result.message}</p>
             )}
           </div>
         )}

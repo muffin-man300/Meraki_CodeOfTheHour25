@@ -16,9 +16,8 @@ symptom_parser.add_argument('cough', type=int, required=True, help='Severity of 
 symptom_parser.add_argument('headache', type=int, required=True, help='Severity of headache (0-9)')
 symptom_parser.add_argument('fatigue', type=int, required=True, help='Severity of fatigue (0-9)')
 symptom_parser.add_argument('nausea', type=int, required=True, help='Severity of nausea (0-9)')
-# For keys with spaces, specify the destination variable name
-symptom_parser.add_argument('sore throat', type=int, required=True, help='Severity of sore throat (0-9)', dest='sore_throat')
-symptom_parser.add_argument('runny nose', type=int, required=True, help='Severity of runny nose (0-9)', dest='runny_nose')
+symptom_parser.add_argument('sore_throat', type=int, required=True, help='Severity of sore throat (0-9)')
+symptom_parser.add_argument('runny_nose', type=int, required=True, help='Severity of runny nose (0-9)')
 
 import pandas as pd
 
