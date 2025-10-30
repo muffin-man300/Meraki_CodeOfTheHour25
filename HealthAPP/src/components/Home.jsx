@@ -30,6 +30,7 @@ export default function Home() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': "Bearer bacaa3381e4c453088449ccd04f270cf"
         },
         body: JSON.stringify(form),
       });
